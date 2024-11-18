@@ -17,21 +17,21 @@ public class Main {
         DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
         //login
-        System.out.println("Digita Login <nome utente> per iniziare");
+        System.out.println("Digita Login <nome utente> per iniziare a comicare:");
         String utente = " ";
         String esitoLogin = " " ;
 
-        do{
+        do {
             utente = scanner.nextLine();
             out.writeBytes(utente + "\n");
             esitoLogin = in.readLine();
-        }while(esitoLogin.equals("login failed"));
-        
-        
-        
-
+            if (esitoLogin.equals("login failed")) {
+                System.out.println("Errore. Il nome utente " + utente + " è gia stato inserito.");
+            }
+        } while (esitoLogin.equals("login failed"));
+        System.out.println("Login completato");
         do {
-            
+            System.out.println("");
         } while (true);
     }
 }
