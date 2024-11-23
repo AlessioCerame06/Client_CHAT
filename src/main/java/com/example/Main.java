@@ -55,7 +55,19 @@ public class Main {
                 } else {
                     System.out.println("Errore nella richiesta");
                 }
-            } else if (comando.contains("LOGOUT")) {
+            } else if (elementiComando[0] == "MSG" && statoLogin == true) {
+                out.writeBytes(comando);
+                esito = in.readLine();
+                if (esito.contains("ERROR MSG")) {
+                    System.out.println("Messaggio non inviato");
+                }
+            } else if (comando.contains("MSG ALL")) {
+                out.writeBytes(comando);
+                esito = in.readLine();
+                if (esito.contains("ERROR MSG ALL")) {
+                    System.out.println("Messaggio non inviato");
+                }
+            }else if (comando.contains("LOGOUT")) {
                 break;
             } else {
                 System.out.println("Errore. Digitare un comando esistente");
