@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -17,35 +16,36 @@ public class Main {
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
-        //login
-        System.out.println("Digita <nome utente> per il login e iniziare a comunicare");
-        String utente = " ";
-        String esitoLogin = " " ;
-
-        do {
-            utente = scanner.nextLine();
-            out.writeBytes(utente + "\n");
-            esitoLogin = in.readLine();
-            if (esitoLogin.equals("login failed")) {
-                System.out.println("Errore. Il nome utente " + utente + " è gia stato inserito.");
-            }
-        } while (esitoLogin.equals("login failed"));
-        System.out.println("Login completato");
-
         //menù
-        String scelta = "";
+        String comando = "";
         do {
             System.out.println("\n");
-            System.out.println("digitare USER LIST per ricevere la lista degli utenti e dei gruppi");
-            System.out.println("digitare CONNECT <destinatario> per connettersi ad un gruppo o ad un utente");
-            System.out.println("digitare CLOSE disconnettersi dal server");
+            System.out.println("digita LOGIN <nome utente> per accedere");
+            System.out.println("digita MSG <destinatario> <messaggio> per inviare un messaggio privato");
+            System.out.println("digita MSG ALL <messaggio> per inviare un messaggio a tutti");
+            System.out.println("digita USERS per ricevere la lista degli utenti connessi");
+            System.out.println("digita LOGOUT per disconnetterti");
             System.out.println("\n");
 
-            scelta = scanner.nextLine();
+            comando = scanner.nextLine();
+
+        }while(true);
+        /*
+        String comando = "";
+        do {
+            System.out.println("\n");
+            System.out.println("digita LOGIN <nome utente> per accedere");
+            System.out.println("digita MSG <destinatario> <messaggio> per inviare un messaggio privato");
+            System.out.println("digita MSG ALL <messaggio> per inviare un messaggio a tutti");
+            System.out.println("digita USERS per ricevere la lista degli utenti connessi");
+            System.out.println("digita LOGOUT per disconnetterti");
+            System.out.println("\n");
+
+            comando = scanner.nextLine();
             
-            //USER LIST
+            
             String risposta = " ";
-            if(scelta.equals("USER LIST")){    //USER LIST
+            if(comando.equals("USER LIST")){    //USER LIST
                 out.writeBytes("*" + "\n");
                 while(!risposta.equals("@")){
                     risposta = in.readLine();
@@ -53,20 +53,20 @@ public class Main {
                         System.out.println(risposta);
                     }
                 }
-            }else if(scelta.contains("CONNECT")){       //CONNECT
+            }else if(comando.contains("CONNECT")){       //CONNECT
                 String messaggio = " ";
                 System.out.println("digitare LEAVE per disconnettersi e ritornare al menù");
                 while(!messaggio.equals("LEAVE")){
                     messaggio = scanner.nextLine();
                     out.writeBytes(messaggio + "\n");
                 }
-            } else if (scelta.equals("LEAVE")){
+            } else if (comando.equals("LEAVE")){
                 out.writeBytes("!" + "\n");
-            } else if (scelta.equals("CLOSE")){      //CLOSE
+            } else if (comando.equals("LOGOUT")){      //CLOSE
                 out.writeBytes("?" + "\n");
                 break;
             } else {
-                System.out.println("Errore. Il comando " + scelta + " non esiste.");
+                System.out.println("Errore. Il comando non esiste.");
             }
         } while (true);
         socket.close();
@@ -74,5 +74,6 @@ public class Main {
         in.close();
         out.close();
         System.out.println("Sei stato disconnesso");
+        */
     }
 }
