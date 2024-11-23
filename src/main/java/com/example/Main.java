@@ -30,16 +30,6 @@ public class Main {
             comando = scanner.nextLine();
 
         }while(true);
-        /*
-        String comando = "";
-        do {
-            System.out.println("\n");
-            System.out.println("digita LOGIN <nome utente> per accedere");
-            System.out.println("digita MSG <destinatario> <messaggio> per inviare un messaggio privato");
-            System.out.println("digita MSG ALL <messaggio> per inviare un messaggio a tutti");
-            System.out.println("digita USERS per ricevere la lista degli utenti connessi");
-            System.out.println("digita LOGOUT per disconnetterti");
-            System.out.println("\n");
 
             comando = scanner.nextLine();
             
